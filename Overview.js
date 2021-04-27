@@ -59,9 +59,6 @@ function spawnEnemies() {
     var tetranadon = new Tetranadon("Tetranadon", 1, 2, 3);
     log(tetranadon);
 
-    //Let's try storing Tetranadon in the localStorage functionality
-    localStorage.setItem('Tetranadon', JSON.stringify(tetranadon));
-
     /*
     createObj('graphic', {
         name: 'Daniel',
@@ -73,8 +70,6 @@ function spawnEnemies() {
 
 //Tetranadon's turn!
 function TetraTurn() {
-    //Add in get for localStorage tetranadon functionality
-    let tetranadon = JSON.parse(localStorage.getItem('Tetranadon'));
 
     tetranadon.takeTurn();
     tetranadon.attack();
