@@ -22,7 +22,7 @@ class Monster {
     attack() {
         let attackChance = randomInteger(100);
         log(`attackChance = ${attackChance}`);
-        sendChat(`${this.name} takes its turn!`);
+        sendChat("Narrator", `${this.name} takes its turn!`);
         
         //Check if the monster is enraged
         this.enrageCheck();

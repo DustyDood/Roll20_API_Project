@@ -17,6 +17,8 @@ function handleInput(message) {
     //Simple code to see who sent the message!
     //This confirms that message.who is just the display name!
     //WE can use this when trying to gather responses if an attack hits.
+
+    /*
     log(`${message.who} has the id of ${message.playerid}`)
     if(message.who == "Dusty Z. (GM)") {
         log("Dusty sent this!")
@@ -24,6 +26,7 @@ function handleInput(message) {
     else {
         log("Dusty not recognized")
     }
+    */
 
 
     if(message.type == 'api') {
@@ -56,15 +59,22 @@ function spawnEnemies() {
     var tetranadon = new Tetranadon("Tetranadon", 1, 2, 3);
     log(tetranadon);
 
+    //Let's try storing Tetranadon in the localStorage functionality
+    localStorage.setItem('Tetranadon', JSON.stringify(tetranadon));
+
+    /*
     createObj('graphic', {
         name: 'Daniel',
         pageid: Campaign().get('playerpageid')
     });
+    */
 
 }
 
 //Tetranadon's turn!
 function TetraTurn() {
+    //Add in get for localStorage tetranadon functionality
+    let tetranadon = JSON.parse(localStorage.getItem('Tetranadon'));
 
     tetranadon.takeTurn();
     tetranadon.attack();

@@ -8,8 +8,9 @@ class Tetranadon extends Monster {
 
     attackChoice(value) {
         let attackSuccess = false;
+        log(`Monster is enraged: ${this.enraged}`)
 
-        if (this.enraged) {
+        if (!this.enraged) {
             //Attack tree for non-enraged
             switch(true) {
                 case(value <= 10):
