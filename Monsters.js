@@ -2,6 +2,9 @@
 //We want to start by defining an initial Monster class
 //This will contain attacks and aggro behavior!!
 
+//Maybe we'll make the methods static, as there is only one monster we're going to spawn per type...
+//I feel like there should be a better solution, but that would involve using state
+
 class Monster {
     constructor(name, headAttack, armAttack, tailAttack) {
         this.name = name;
