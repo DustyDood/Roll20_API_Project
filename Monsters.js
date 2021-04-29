@@ -26,11 +26,14 @@ class Monster {
         let attackChance = randomInteger(100);
         log(`attackChance = ${attackChance}`);
         sendChat("Narrator", `${this.name} takes its turn!`);
-        
-        //Check if the monster is enraged
-        this.enrageCheck();
 
-        this.attackChoice(attackChance);
+        //Check if the monster is enraged
+
+        let attackGo = this.enrageCheck();
+        if (attackGo) {
+          this.attackChoice(attackChance);
+        }
+
     }
 
     //The value from attack is then passed to attackChoice. This tree will be different for each monster!
@@ -46,18 +49,18 @@ class Monster {
             if (this.enragedTimer == 3) {
                 sendChat("Narrator",`${this.name} is taking a breather after being enraged so long!`)
                 //Want to stop full code execution here!
-                return;
+                return false;
             }
             else {
                 sendChat("Narrator", `${this.name} is currently enraged!`);
                 this.enragedTimer++;
                 log(`${this.name} enrage state: ${this.enragedTimer}`);
+                return true;
             }
         }
         else {
             log(`${this.name} is not currently enraged.`);
+            return true;
         }
     }
 }
-
-

@@ -20,15 +20,16 @@ class Tetranadon extends Monster {
                 case(value >= 11 && value <= 65):
                     sendChat("Narrator", "The Tetranadon swipes with his tiny arms!");
                     attackSuccess = this.hitCheck(this.armAttack);
+                    this.enraged = true;
                     break;
-                
+
                 case(value >= 66 && value <= 90):
                     sendChat("Narrator", "The Tetranadon shakes his tiny tail before backing up suddenly!!");
                     attackSuccess = this.hitCheck(this.tailAttack);
                     break;
                 default:
                     log("Tetra does nothing");
-                    break; 
+                    break;
             }
             log(`attackSuccess is ${attackSuccess}`);
         }
@@ -44,14 +45,14 @@ class Tetranadon extends Monster {
                     sendChat("Narrator", "The Tetranadon picks up a massive rock and hurls it at you!");
                     attackSuccess = this.hitCheck(this.armAttack + 1);
                     break;
-                
+
                 case(value >= 71 && value <= 100):
                     sendChat("Narrator", "The Tetranadon raises his leg and stomps suddenly, shaking the ground!!");
                     attackSuccess = this.hitCheck(this.tailAttack + 1);
                     break;
                 default:
                     log("Tetra does nothing");
-                    break; 
+                    break;
             }
             log(`attackSuccess is ${attackSuccess}`);
         }
