@@ -17,6 +17,7 @@ class Tetranadon extends Monster {
                     sendChat("Narrator", "The Tetranadon uses a massive body slam!!!");
                     attackSuccess = this.hitCheck(this.headAttack);
                     break;
+
                 case(value >= 11 && value <= 65):
                     sendChat("Narrator", "The Tetranadon swipes with his tiny arms!");
                     attackSuccess = this.hitCheck(this.armAttack);
@@ -27,6 +28,7 @@ class Tetranadon extends Monster {
                     sendChat("Narrator", "The Tetranadon shakes his tiny tail before backing up suddenly!!");
                     attackSuccess = this.hitCheck(this.tailAttack);
                     break;
+
                 default:
                     log("Tetra does nothing");
                     break;
@@ -34,6 +36,8 @@ class Tetranadon extends Monster {
             log(`attackSuccess is ${attackSuccess}`);
         }
         else {
+            //Increment the enragedTimer to ensure the monster doesn't stay enraged forever.
+            this.enragedTimer++;
             //Attack tree for enraged
             //There is no option for dawdling when enraged!!
             switch(true) {
@@ -41,6 +45,7 @@ class Tetranadon extends Monster {
                     sendChat("Narrator", "The Tetranadon expands his belly before using the ultimate belly flop!!!");
                     attackSuccess = this.hitCheck(this.headAttack + 1);
                     break;
+
                 case(value >= 11 && value <= 70):
                     sendChat("Narrator", "The Tetranadon picks up a massive rock and hurls it at you!");
                     attackSuccess = this.hitCheck(this.armAttack + 1);
@@ -50,6 +55,7 @@ class Tetranadon extends Monster {
                     sendChat("Narrator", "The Tetranadon raises his leg and stomps suddenly, shaking the ground!!");
                     attackSuccess = this.hitCheck(this.tailAttack + 1);
                     break;
+
                 default:
                     log("Tetra does nothing");
                     break;
