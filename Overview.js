@@ -49,6 +49,15 @@ function handleInput(message) {
             case "mizu":
                 MizuTurn();
                 break;
+            case "test":
+                Test();
+                break;
+            case "spawntest":
+                SpawnTest();
+                break;
+            case "aggrotest":
+                AggroTest("Bobby");
+                break;
             default:
                 log("API Command not recognized");
         }
@@ -102,4 +111,53 @@ function MizuTurn() {
     sendChat("Narrator", "Mizutsune lunges forward with a strong bite!");
     var attackHit = randomInteger(20) + 5;
     sendChat("Narrator", `Does a ${attackHit} hit?`);
+}
+
+function SpawnTest() {
+    createObj('graphic', {
+        name: 'Daniel',
+        pageid: '-MYf2kLz8N-RLoTsxb-c',
+        layer: 'objects',
+        left: '1225',
+        top: '315'
+    });
+}
+
+function Test() {
+    log("Testing..?");
+    var patroltoken = findObjs({_type: "graphic", name: "Ronny"})[0]; 
+    sendChat("Narrator", `${patroltoken.get("name")} walks to the right!`);
+    patroltoken.set("left", patroltoken.get("left") + 70);
+    
+    //We can declare a token marker and set it to the token, as seen below!
+    patroltoken.set("status_skull", true);
+    
+    //log(JSON.parse(Campaign().get("token_markers")));
+    //log(patroltoken.get("_pageid"));
+    
+    let masterLeft = patroltoken.get("left");
+    let masterTop = patroltoken.get("top");
+    log(`masterLeft = ${masterLeft}, masterTop = ${masterTop}`);
+    
+    
+    var enemylist = findObjs({_type: "graphic", controlledby: ""});
+    log(enemylist.length);
+    log(enemylist[0].get("name"));
+    
+    //enemylist.forEach(myFunction);
+        
+        
+    
+}
+
+//This successfully checks if a token has Bobby in the gm notes! 
+//We use unescape to essentially decode how text is stored.
+function myFunction(item, index) {
+    var token = unescape(item.get('gmnotes'));
+    if (token.includes("Bobby")) {
+        log("He's Bobby!");
+    }
+    else {
+        log("That's not Bobby...");
+    }
 }
