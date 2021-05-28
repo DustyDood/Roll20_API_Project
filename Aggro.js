@@ -3,21 +3,25 @@ function AggroTest(enemyName) {
     //The monster will ignore other monsters and typically focus on whichever target is closest.
     //THE EXCEPTION: If a monster takes a large enough amount of damage or is taunted by Drew/an illusion from Christina, it'll go after them instead.
     //I'll probably add an aggroTarget option to the Monster class, which will bypass this whole function lol.
+    
+    let monster = findObjs({name: enemyName});
+    let monsterPage =  monster[0].get("pageid");
+    
 
     //We start by finding all the graphics, meaning our tokens.
     //We then call our filter function checkPlayer, which checks if the controlledby doesn't equal me.
     //Theoretically, this will create a list of tokens that are controlled by players.
-    var graphicslist = findObjs({_type: "graphic"}).filter(checkPlayer);
+    var graphicslist = findObjs({_type: "graphic", _pageid: monsterPage, layer: "objects"}).filter(checkPlayer);
 
-    let enemy = findObjs({name: enemyName});
+    
 
     //Next, we take the position of our monster token and store the top and left coordinates.
-    let monsterLeft = enemy[0].get("left");
-    let monsterTop = enemy[0].get("top");
+    let monsterLeft = monster[0].get("left");
+    let monsterTop = monster[0].get("top");
 
-    log(`${enemy[0].get("name")}'s position: ${monsterLeft} to the left, ${monsterTop} to the top.`);
+    log(`${monster[0].get("name")}'s position: ${monsterLeft} to the left, ${monsterTop} to the top.`);
 
-    let absDistance = 1000;
+    let absDistance = 100000;
     let aggroTarget = "";
     //graphicslist.forEach(ClosestEnemy);
 
@@ -26,6 +30,7 @@ function AggroTest(enemyName) {
     graphicslist.forEach( (enemyArray) => {
         let enemyLeft = enemyArray.get("left");
         let enemyTop = enemyArray.get("top");
+        //log(`${enemyArray.get("name")} is at ${enemyLeft} left and ${enemyTop} top.`);
     
         //We then use Absolute Values to calculate the distance from the enemy.
         let newAbsDistance = Math.abs(monsterLeft - enemyLeft) + Math.abs(monsterTop - enemyTop);
@@ -47,10 +52,74 @@ function AggroTest(enemyName) {
             absDistance = newAbsDistance;
             aggroTarget = enemyArray.get("name");
         }
+        
+        /*
+        if (newAbsDistance > absDistance) {
+            log(`${enemyArray.get("name")} is further away than the previous target.`);
+        }
+        */
     });
 
     log(`The aggro target is ${aggroTarget}`);
     sendChat("Narrator", `${enemyName} has locked on to ${aggroTarget}`);
+    
+    //Basic player info
+    let player = findObjs({name: aggroTarget, pageid: monsterPage});
+    let playerLeft = player[0].get("left");
+    let playerTop = player[0].get("top");
+    log(`${player[0].get("name")} is at ${playerLeft} left and ${playerTop} top.`);
+    
+    //70 * 6, representing 30 speed.
+    let gapdistance = 420;
+    let distanceCounter = 0;
+    
+    //Here we'll have our monster start to approach the hunter it's locked on to.
+    if (monsterLeft == playerLeft + 105) {
+        
+    }
+    else if (monsterLeft > playerLeft + 105) {
+        if (monsterLeft - playerLeft > gapdistance + 105) {
+            monster[0].set("left", monsterLeft + gapdistance);
+            distanceCounter++;
+        }
+        else {
+            monster[0].set("left", playerLeft + 105);
+        }
+    }
+    else if (monsterLeft < playerLeft - 105) {
+        if (playerLeft - monsterLeft > gapdistance + 105) {
+            monster[0].set("left", monsterLeft + gapdistance);
+            distanceCounter++;
+        }
+        else {
+            monster[0].set("left", playerLeft - 105);
+        }
+    }
+
+    if (monsterTop == playerTop + 105) {
+        
+    }
+    else if (monsterTop > playerTop + 105) {
+        if (monsterTop - playerTop > gapdistance + 105) {
+            monster[0].set("top", monsterTop + gapdistance);
+            distanceCounter++;
+        }
+        else {
+            monster[0].set("top", playerTop + 105);
+        }
+    }
+    else if (monsterTop < playerTop - 105) {
+        if (playerTop - monsterTop > gapdistance + 105) {
+            monster[0].set("top", monsterTop + gapdistance);
+            distanceCounter++;
+        }
+        else {
+            monster[0].set("top", playerTop - 105);
+        }
+    }
+    
+    
+    return [distanceCounter, aggroTarget];
 
 }
 

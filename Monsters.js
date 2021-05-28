@@ -1,4 +1,3 @@
-
 //We want to start by defining an initial Monster class
 //This will contain attacks and aggro behavior!!
 
@@ -19,7 +18,17 @@ class Monster {
     }
 
     takeTurn() {
+        sendChat("Narrator", `${this.name} takes its turn!`);
         log(`The ${this.name} takes its turn!`);
+        let aggroTarget = AggroTest(this.name);
+        log(`distanceCounter = ${aggroTarget[0]}, aggroTarget = ${aggroTarget[1]}`)
+        if (aggroTarget[0] > 0) {
+            sendChat("Narrator", `${this.name} is out of range!`);
+        }
+        else {
+            log("The monster is attacking.");
+            this.attack();
+        }
 
     }
 
@@ -28,7 +37,7 @@ class Monster {
     attack() {
         let attackChance = randomInteger(100);
         log(`attackChance = ${attackChance}`);
-        sendChat("Narrator", `${this.name} takes its turn!`);
+
 
         //I need to add an aggro function here so we know who the monster is targeting!
         //This will also control movement and what not, as the monster will approach the token it is aggro'd on.
@@ -47,7 +56,11 @@ class Monster {
         log("you shouldn't see this!");
     }
 
-    //Enraged check: We'll see if the monster is enraged or not. If so, it'll increment an int.
+    enrageCheck() {
+        
+    }
+
+    //Enraged break: We'll see if the monster is enraged or not. If so, it'll increment an int.
     //A monster will only stay enraged for 3 turns. After that, it'll take a turn to rest.
     //If it's not enraged, it'll proceed to attack like normal.
     enrageBreak() {

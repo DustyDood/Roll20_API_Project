@@ -56,7 +56,8 @@ function handleInput(message) {
                 SpawnTest();
                 break;
             case "aggrotest":
-                AggroTest("Bobby");
+                let target = AggroTest("Rajang");
+                log(`${target} is our target!`);
                 break;
             default:
                 log("API Command not recognized");
@@ -103,7 +104,6 @@ function TetraTurn() {
     let tetranadon = state.DustyDoodsMonster.Tetranadon;
 
     tetranadon.takeTurn();
-    tetranadon.attack();
 }
 
 //Mizutsune's turn!
@@ -113,6 +113,7 @@ function MizuTurn() {
     sendChat("Narrator", `Does a ${attackHit} hit?`);
 }
 
+/*
 function SpawnTest() {
     createObj('graphic', {
         name: 'Daniel',
@@ -122,12 +123,13 @@ function SpawnTest() {
         top: '315'
     });
 }
+*/
 
 function Test() {
     log("Testing..?");
-    var patroltoken = findObjs({_type: "graphic", name: "Ronny"})[0]; 
-    sendChat("Narrator", `${patroltoken.get("name")} walks to the right!`);
-    patroltoken.set("left", patroltoken.get("left") + 70);
+    var patroltoken = findObjs({_type: "graphic", name: "Rajang"})[0]; 
+    //sendChat("Narrator", `${patroltoken.get("name")} walks to the right!`);
+    //patroltoken.set("left", patroltoken.get("left") + 70);
     
     //We can declare a token marker and set it to the token, as seen below!
     patroltoken.set("status_skull", true);
