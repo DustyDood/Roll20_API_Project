@@ -1,6 +1,7 @@
-//I need a way to connect the digital tokens created in Roll20
-//With an instance of the monster that I create through code!
-class Tetranadon extends Monster {
+//This is our Mizutsune class!
+//Maybe all my monsters are a little too powerful...
+
+class Mizutsune extends Monster {
 
     constructor(name, headAttack, armAttack, tailAttack) {
         super(name, headAttack, armAttack, tailAttack);
@@ -15,23 +16,23 @@ class Tetranadon extends Monster {
         if (!this.enraged) {
             //Attack tree for non-enraged
             switch(true) {
-                case(value <= 10):
-                    sendChat("Narrator", "The Tetranadon uses a massive body slam!!!");
+                case(value <= 40):
+                    sendChat("Narrator", "The Mizutsune lunges forward, biting you!!!");
                     setTimeout(()=> {this.hitCheck(this.headAttack, aggroTarget)}, 1500);
                     break;
 
-                case(value >= 11 && value <= 65):
-                    sendChat("Narrator", "The Tetranadon swipes with his tiny arms!");
+                case(value >= 41 && value <= 60):
+                    sendChat("Narrator", "The Mizutsune uses a double scratch attack!");
                     setTimeout(()=> {this.hitCheck(this.armAttack, aggroTarget)}, 1500);
                     break;
 
-                case(value >= 66 && value <= 90):
-                    sendChat("Narrator", "The Tetranadon shakes his tiny tail before backing up suddenly!!");
+                case(value >= 61 && value <= 100):
+                    sendChat("Narrator", "The Mizutsune swings her massive tail!!");
                     setTimeout(()=> {this.hitCheck(this.tailAttack, aggroTarget)}, 1500);
                     break;
 
                 default:
-                    sendChat("Narrator", "The Tetranadon is lounging about...");
+                    sendChat("Narrator", "The Mizutsune is idly making bubbles...");
                     break;
             }
             log(`attackSuccess is ${attackSuccess}`);
@@ -41,23 +42,23 @@ class Tetranadon extends Monster {
             //Attack tree for enraged
             //There is no option for dawdling when enraged!!
             switch(true) {
-                case(value <= 45):
-                    sendChat("Narrator", "The Tetranadon expands his belly before using the ultimate belly flop!!!");
+                case(value <= 35):
+                    sendChat("Narrator", "The Mizutsune charges and release a highly pressurized stream of water!!!");
                     setTimeout(()=> {this.hitCheck(this.headAttack + 1, aggroTarget)}, 1500);
                     break;
 
-                case(value >= 46 && value <= 85):
-                    sendChat("Narrator", "The Tetranadon picks up a massive rock and hurls it at you!");
+                case(value >= 36 && value <= 75):
+                    sendChat("Narrator", "The Mizutsune rears her body upwards before swiping with both claws!");
                     setTimeout(()=> {this.hitCheck(this.armAttack + 1, aggroTarget)}, 1500);
                     break;
 
-                case(value >= 86 && value <= 100):
-                    sendChat("Narrator", "The Tetranadon raises his leg and stomps suddenly, shaking the ground!!");
+                case(value >= 76 && value <= 100):
+                    sendChat("Narrator", "The Mizutsune spins around and unleashes a massive tail swipe!!");
                     setTimeout(()=> {this.hitCheck(this.tailAttack + 1, aggroTarget)}, 1500);
                     break;
 
                 default:
-                    log("Tetra does nothing");
+                    sendChat("Narrator", "The Mizutsune is blowing more bubbles...");
                     break;
             }
             log(`attackSuccess is ${attackSuccess}`);

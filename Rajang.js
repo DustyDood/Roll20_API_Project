@@ -1,6 +1,7 @@
-//I need a way to connect the digital tokens created in Roll20
-//With an instance of the monster that I create through code!
-class Tetranadon extends Monster {
+//This is our Rajang class!
+//I honestly think he's going to hit way too hard. I'll need to test him a little.
+
+class Rajang extends Monster {
 
     constructor(name, headAttack, armAttack, tailAttack) {
         super(name, headAttack, armAttack, tailAttack);
@@ -15,23 +16,23 @@ class Tetranadon extends Monster {
         if (!this.enraged) {
             //Attack tree for non-enraged
             switch(true) {
-                case(value <= 10):
-                    sendChat("Narrator", "The Tetranadon uses a massive body slam!!!");
+                case(value <= 30):
+                    sendChat("Narrator", "The Rajang charges forward, headbutting you!!");
                     setTimeout(()=> {this.hitCheck(this.headAttack, aggroTarget)}, 1500);
                     break;
 
-                case(value >= 11 && value <= 65):
-                    sendChat("Narrator", "The Tetranadon swipes with his tiny arms!");
+                case(value >= 31 && value <= 80):
+                    sendChat("Narrator", "The Rajang raises his arm and takes a massive swing!!!");
                     setTimeout(()=> {this.hitCheck(this.armAttack, aggroTarget)}, 1500);
                     break;
 
-                case(value >= 66 && value <= 90):
-                    sendChat("Narrator", "The Tetranadon shakes his tiny tail before backing up suddenly!!");
+                case(value >= 81 && value <= 100):
+                    sendChat("Narrator", "The Rajang jumps backward hastily, knocking you aside!");
                     setTimeout(()=> {this.hitCheck(this.tailAttack, aggroTarget)}, 1500);
                     break;
 
                 default:
-                    sendChat("Narrator", "The Tetranadon is lounging about...");
+                    sendChat("Narrator", "The Rajang is grooming himself...");
                     break;
             }
             log(`attackSuccess is ${attackSuccess}`);
@@ -41,23 +42,23 @@ class Tetranadon extends Monster {
             //Attack tree for enraged
             //There is no option for dawdling when enraged!!
             switch(true) {
-                case(value <= 45):
-                    sendChat("Narrator", "The Tetranadon expands his belly before using the ultimate belly flop!!!");
+                case(value <= 35):
+                    sendChat("Narrator", "The Rajang unleashes a massive beam of lightning!!!");
                     setTimeout(()=> {this.hitCheck(this.headAttack + 1, aggroTarget)}, 1500);
                     break;
 
-                case(value >= 46 && value <= 85):
-                    sendChat("Narrator", "The Tetranadon picks up a massive rock and hurls it at you!");
+                case(value >= 36 && value <= 75):
+                    sendChat("Narrator", "The Rajang, in an amazing feat of strength, rips out a tree and throws it at you!!!");
                     setTimeout(()=> {this.hitCheck(this.armAttack + 1, aggroTarget)}, 1500);
                     break;
 
-                case(value >= 86 && value <= 100):
-                    sendChat("Narrator", "The Tetranadon raises his leg and stomps suddenly, shaking the ground!!");
+                case(value >= 76 && value <= 100):
+                    sendChat("Narrator", "The Rajang jumps into the air, curling into a ball!");
                     setTimeout(()=> {this.hitCheck(this.tailAttack + 1, aggroTarget)}, 1500);
                     break;
 
                 default:
-                    log("Tetra does nothing");
+                    sendChat("Narrator", "The Rajang is taking a breather...");
                     break;
             }
             log(`attackSuccess is ${attackSuccess}`);

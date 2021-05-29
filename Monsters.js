@@ -28,12 +28,12 @@ class Monster {
         let aggroTarget = AggroTest(this.name);
         log(`distanceCounter = ${aggroTarget[0]}, aggroTarget = ${aggroTarget[1]}`)
         if (aggroTarget[0] > 0) {
-            sendChat("Narrator", `${this.name} is out of range!`);
+            setTimeout( ()=> {sendChat("Narrator", `${this.name} is out of range!`)}, 2000);
         }
         else {
             log("The monster is attacking.");
             //As we are only passing the target, we pass the 2nd item of the array, which is the target itself. 
-            this.attack(aggroTarget[1]);
+            setTimeout( ()=> {this.attack(aggroTarget[1])}, 2000);
         }
 
     }
@@ -47,7 +47,7 @@ class Monster {
         //Check if the monster is enraged for too long, thus needing a break instead of attacking. 
         let attackGo = this.enrageBreak();
         if (attackGo) {
-          this.attackChoice(attackChance, aggroTarget);
+          setTimeout( () => {this.attackChoice(attackChance, aggroTarget)}, 2000);
         }
 
     }
@@ -118,7 +118,7 @@ class Monster {
         log(`${aggroTarget} is the monster's target.`);
         let aggroToken = findObjs({name: aggroTarget});
 
-        //Something's breaking here...
+        //Something's breaking here... The controlledby is getting their id vs name
         let aggroPlayer = aggroToken[0].get("controlledby");
         sendChat("Narrator", `Does a ${hitChance} hit you, ${aggroPlayer}?`);
 

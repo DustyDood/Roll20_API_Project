@@ -49,6 +49,9 @@ function handleInput(message) {
             case "mizu":
                 MizuTurn();
                 break;
+            case "rajang":
+                RajangTurn();
+                break;
             case "test":
                 Test();
                 break;
@@ -92,17 +95,23 @@ function spawnEnemies() {
     sendChat("Narrator", "The enemies are spawning!");
 
     var tetranadon = new Tetranadon("Tetranadon", 2, 1, 3);
-    log(tetranadon);
+    var rajang = new Rajang("Rajang", 2, 3, 1);
+    var mizutsune = new Mizutsune("Mizutsune", 3, 1, 2);
+    //log(tetranadon);
 
     //This will store our newly created monsters in our state, functions and all!
     //They won't persist between sandbox sessions... But they will last for now.
     if( ! state.DustyDoodsMonster) {
         state.DustyDoodsMonster = {
-          Tetranadon: tetranadon
+          Tetranadon: tetranadon,
+          Rajang: rajang,
+          Mizutsune: mizutsune
         }
     } else {
       state.DustyDoodsMonster = {
-        Tetranadon: tetranadon
+        Tetranadon: tetranadon,
+        Rajang: rajang,
+        Mizutsune: mizutsune
       }
     }
 
@@ -126,9 +135,13 @@ function TetraTurn() {
 
 //Mizutsune's turn!
 function MizuTurn() {
-    sendChat("Narrator", "Mizutsune lunges forward with a strong bite!");
-    var attackHit = randomInteger(20) + 5;
-    sendChat("Narrator", `Does a ${attackHit} hit?`);
+    let mizutsune = state.DustyDoodsMonster.Mizutsune;
+    mizutsune.takeTurn();
+}
+
+function RajangTurn() {
+    let rajang = state.DustyDoodsMonster.Rajang;
+    rajang.takeTurn();
 }
 
 /*
