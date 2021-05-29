@@ -36,8 +36,8 @@ function handleInput(message) {
 
 
     if(message.type == 'api') {
-        let messageEdit = message.content.toLowerCase();
-        messageEdit = messageEdit.substring(1, messageEdit.length)
+        let messageArray = message.content.splitArgs();   //.toLowerCase();
+        messageEdit = messageArray[0].toLowerCase().substring(1);
         log(messageEdit);
         switch(messageEdit) {
             case "spawnenemies":
@@ -59,6 +59,25 @@ function handleInput(message) {
                 let target = AggroTest("Rajang");
                 log(`${target} is our target!`);
                 break;
+            case "chattest":
+                //chatResponse("Dusty Z.");
+                sendChat("Narrator", "[yes](!yesbutton)");
+                break;
+            case "yesbutton":
+                log("The yes button was pressed");
+                break;
+            case "nobutton":
+                log("The no button was pressed");
+                break;
+            case "rollfordamage":
+                //RollForDamage("bobby", 1, 6, 3);
+
+                RollForDamage(messageArray[1], messageArray[2], messageArray[3], messageArray[4]);
+                break;
+
+            //SUCCESS!~ Using splitArgs we can call an API with parameters...
+            case "splittest":
+                testingSplit(messageArray[1]);
             default:
                 log("API Command not recognized");
         }
@@ -72,7 +91,7 @@ function handleInput(message) {
 function spawnEnemies() {
     sendChat("Narrator", "The enemies are spawning!");
 
-    var tetranadon = new Tetranadon("Tetranadon", 1, 2, 3);
+    var tetranadon = new Tetranadon("Tetranadon", 2, 1, 3);
     log(tetranadon);
 
     //This will store our newly created monsters in our state, functions and all!
@@ -102,7 +121,6 @@ function spawnEnemies() {
 //Tetranadon's turn!
 function TetraTurn() {
     let tetranadon = state.DustyDoodsMonster.Tetranadon;
-
     tetranadon.takeTurn();
 }
 
@@ -162,4 +180,8 @@ function myFunction(item, index) {
     else {
         log("That's not Bobby...");
     }
+}
+
+function testingSplit(words) {
+    log(`The parameter passed was ${words}`);
 }
