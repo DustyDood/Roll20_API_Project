@@ -73,14 +73,28 @@ function handleInput(message) {
                 log("The no button was pressed");
                 break;
             case "rollfordamage":
-                //RollForDamage("bobby", 1, 6, 3);
-
                 RollForDamage(messageArray[1], messageArray[2], messageArray[3], messageArray[4]);
+                break;
+
+            //This is called if the player clicks no.
+            case "dodgeoptions":
+                DodgeOptions(messageArray[1]);
                 break;
 
             //SUCCESS!~ Using splitArgs we can call an API with parameters...
             case "splittest":
                 testingSplit(messageArray[1]);
+                break;
+
+            case "apicheck":
+                let textClicker = message.playerid;
+                log(`${textClicker} is textClicker`);
+                if(textClicker == messageArray[1]) {
+                    sendChat("Narrator", "success!!!");
+                }
+                APICheck(messageArray[1], textClicker);
+                break;
+
             default:
                 log("API Command not recognized");
         }
@@ -197,4 +211,9 @@ function myFunction(item, index) {
 
 function testingSplit(words) {
     log(`The parameter passed was ${words}`);
+}
+
+function APICheck(target, clickedBy) {
+    sendChat("Narrator", `This function was instantiated by ${target} and clicked on by ${clickedBy}.`);
+    
 }

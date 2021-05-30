@@ -120,7 +120,9 @@ class Monster {
 
         //Something's breaking here... The controlledby is getting their id vs name
         let aggroPlayer = aggroToken[0].get("controlledby");
-        sendChat("Narrator", `Does a ${hitChance} hit you, ${aggroPlayer}?`);
+        sendChat("Narrator", `Does a ${hitChance} hit you, ${aggroTarget}?`);
+
+        //What if we use aggroPlayer to see who controls the token, thus controlling API calls?
 
         //Creating a switch/case statement to give variety to the dice type rolled
         let diceType = 0;
@@ -145,7 +147,10 @@ class Monster {
         //Ok, so we're going to create 2 buttons here.
         //No will give some generic dodge message.
         //Yes will actually send a message to roll for damage.
-        sendChat("Narrator", `[Yes](!rollfordamage ${aggroTarget} ${hitValue} ${diceType} ${hitValue + 1}) [No](!splittest aggroTarget)`);
+        sendChat("Narrator", `[Yes](!rollfordamage ${aggroTarget} ${hitValue} ${diceType} ${hitValue + 1}) [No](!dodgeoptions ${aggroTarget}) [Test](!apicheck ${aggroPlayer})`);
+
+        //Currently I haev an apicheck command... This is for testing the yes/no buttons and who clicks them.
+        //If roll20 doesn't work tomorrow for the user, then I'll have to revert back to this copy.
         return true;
     }
 }
